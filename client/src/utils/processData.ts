@@ -1,3 +1,4 @@
+import { sort } from "d3";
 import type { TeamSeasonData, TeamWinRateDataPoint } from "../types";
 
 export function calculateWinRates(tsd: TeamSeasonData): TeamWinRateDataPoint {
@@ -15,8 +16,11 @@ export function calculateWinRates(tsd: TeamSeasonData): TeamWinRateDataPoint {
   }
 }
 
-export function getSortedWinRateData(tsdArr: TeamSeasonData[]): TeamWinRateDataPoint[] {
+export type SortKey = "WinPercentage" | "PointsPercentage";
+
+export function getSortedWinRateData(tsdArr: TeamSeasonData[], sortKey?: SortKey): TeamWinRateDataPoint[] {
+  let sortParameter: SortKey = sortKey ? sortKey : "WinPercentage" // Defaults to sorting by Win pct.
   return tsdArr
     .map(calculateWinRates)
-    .sort((a, b) => b.WinPercentage - a.WinPercentage); // by default sort by win pct. could also use a[SortKey] and b[SortKey] TODO:
+    .sort((a, b) => b[sortParameter] - a[sortParameter]);
 }
