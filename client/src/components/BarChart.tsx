@@ -5,9 +5,9 @@ import type { TeamWinRateDataPoint } from "../types";
 import { scaleBand, scaleLinear } from "d3-scale";
 
 export default function BarChart({ data }: { data: TeamWinRateDataPoint[] }) { // NOTE: tsx prop handling kinda sucks
-  const width = 600;
+  const width = 800;
   const height = 400;
-  const margin = { top: 20, right: 30, bottom: 30, left: 120 };
+  const margin = { top: 20, right: 30, bottom: 30, left: 140 };
 
   const boundedWidth = width - margin.left - margin.right;  // 450px plot area
   const boundedHeight = height - margin.top - margin.bottom; // 350px plot area
