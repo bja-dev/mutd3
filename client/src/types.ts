@@ -78,11 +78,11 @@ export const METRIC_OPTIONS = [
   "Draws",
   "GoalsFor",
   "GoalsAgainst",
-  "GoalDifference",
+  // "GoalDifference", // DOES NOT WORK FOR A BAR CHART
   "MatchesPlayed",
   "WinPercentage",
   "PointsPercentage",
 ] as const;
 
 // FIXME: this sucks but i will fix it later
-export type ChartMetricKey = "Points" |"Wins" |"Losses" |"Draws" |"GoalsFor" |"GoalsAgainst" |"GoalDifference" |"MatchesPlayed" |"WinPercentage" |"PointsPercentage";
+export type ChartMetricKey = "Points" |"Wins" |"Losses" |"Draws" |"GoalsFor" |"GoalsAgainst" |/*"GoalDifference"|*/"MatchesPlayed" |"WinPercentage" |"PointsPercentage";
