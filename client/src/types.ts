@@ -48,6 +48,8 @@ export interface TeamSeasonData {
   TopTeamScorer: string;
   Goalkeeper: string;
   Notes: string;
+  WinPercentage: number;
+  PointsPercentage: number;
 }
 export function mapTeamStanding(raw: RawTeamSeasonData): TeamSeasonData {
   return {
@@ -63,12 +65,24 @@ export function mapTeamStanding(raw: RawTeamSeasonData): TeamSeasonData {
     Points:Number(raw.Pts),
     TopTeamScorer: raw["Top Team Scorer"],
     Goalkeeper: raw.Goalkeeper,
-    Notes: raw.Notes
+    Notes: raw.Notes,
+    WinPercentage: (Number(raw.W) / Number(raw.MP) * 100),
+    PointsPercentage: (Number(raw.Pts) / (Number(raw.MP)*3) * 100),
   }
 }
 
-export interface TeamWinRateDataPoint {
-  ClubName: string;
-  WinPercentage: number; // (wins / matchesplayed) * 100
-  PointsPercentage: number; // (points / (matchesplayed * 3)) * 100 {each match can give 3pts for a win, 1pt for a draw, 0 for loss}
-}
+export const METRIC_OPTIONS = [
+  "Points",
+  "Wins",
+  "Losses",
+  "Draws",
+  "GoalsFor",
+  "GoalsAgainst",
+  "GoalDifference",
+  "MatchesPlayed",
+  "WinPercentage",
+  "PointsPercentage",
+] as const;
+
+// FIXME: this sucks but i will fix it later
+export type ChartMetricKey = "Points" |"Wins" |"Losses" |"Draws" |"GoalsFor" |"GoalsAgainst" |"GoalDifference" |"MatchesPlayed" |"WinPercentage" |"PointsPercentage";
